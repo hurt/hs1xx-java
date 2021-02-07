@@ -1,0 +1,143 @@
+plugins {
+    id 'groovy'
+    id 'java'
+    id 'maven-publish'
+    id "io.freefair.lombok" version "5.3.0"
+    id 'jacoco'
+    id 'signing'
+    id "com.github.spotbugs" version "4.6.0"
+    id 'net.researchgate.release' version '2.8.1'
+}
+
+group 'net.draal.home'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            pom {
+                name = 'hs1xx'
+                packaging = 'jar'
+                description = 'A Java client for HS-1xx devices'
+                url = 'https://github.com/hurt/hs1xx-java'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'http://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'hurt'
+                        name = 'Tobias Theisselmann'
+                        email = 'mail@zathras.info'
+                        url = 'https://github.com/hurt'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/hurt/hs1xx-java.git'
+                    developerConnection = 'scm:git:git@github.com:hurt/hs1xx-java.git'
+                    url = 'https://github.com/hurt/hs1xx-java'
+                }
+            }
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications.mavenJava
+}
+
+release {
+    git {
+        signTag = true
+    }
+}
+
+afterReleaseBuild.dependsOn publish
+
+dependencies {
+    implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
+    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
+    implementation group: 'com.google.guava', name: 'guava', version: '30.1-jre'
+    compileOnly group: 'net.jcip', name: 'jcip-annotations', version: '1.0'
+    compileOnly group: 'com.github.spotbugs', name: 'spotbugs-annotations', version: '4.2.0'
+
+
+    testImplementation group: 'org.codehaus.groovy', name: 'groovy', version: '3.0.7'
+    testImplementation platform(group: 'org.spockframework', name: 'spock-bom', version: '2.0-M4-groovy-3.0')
+    testImplementation group: 'org.spockframework', name: 'spock-core'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'us.abstracta', name: 'wiresham', version: '0.5'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.0'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine'
+    testRuntimeOnly group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.0'
+    testRuntimeOnly group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.0'
+    testRuntimeOnly group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: '2.14.0'
+    testRuntimeOnly group: 'net.bytebuddy', name: 'byte-buddy', version: '1.10.10'
+    testRuntimeOnly group: 'org.objenesis', name: 'objenesis', version: '3.1'
+
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+}
+
+spotbugs {
+    excludeFilter = file('config/spotbugs-exclude.xml')
+}
+
+spotbugsMain {
+    reports {
+        html {
+            enabled = true
+            destination = file("$buildDir/reports/spotbugs/main/spotbugs.html")
+            stylesheet = 'fancy-hist.xsl'
+        }
+    }
+}
+
+spotbugsTest {
+    reports {
+        html {
+            enabled = true
+            destination = file("$buildDir/reports/spotbugs/test/spotbugs.html")
+            stylesheet = 'fancy-hist.xsl'
+        }
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 1.00
+            }
+        }
+    }
+}

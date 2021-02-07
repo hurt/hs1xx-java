@@ -1,0 +1,31 @@
+{
+  "system": {
+    "get_sysinfo": {
+      "sw_ver": "1.0.4 Build 191111 Rel.143500",
+      "hw_ver": "4.0",
+      "model": "HS110(EU)",
+      "deviceId": "80065CB850F4A717CA096446BA35FC4A1CF45D69",
+      "oemId": "BC7DF59F436483CD3D8396111011B83E",
+      "hwId": "06D9793BF7C4C3E37A386CB6C5D4A929",
+      "rssi": -41,
+      "longitude_i": 216370,
+      "latitude_i": 581703,
+      "alias": "pmon1",
+      "status": "new",
+      "mic_type": "IOT.SMARTPLUGSWITCH",
+      "feature": "TIM:ENE",
+      "mac": "B0:95:75:FC:CB:21",
+      "updating": 0,
+      "led_off": 0,
+      "relay_state": 1,
+      "on_time": 3700,
+      "active_mode": "none",
+      "icon_hash": "",
+      "dev_name": "Smart Wi-Fi Plug With Energy Monitoring",
+      "next_action": {
+        "type": -1
+      },
+      "err_code": 0
+    }
+  }
+}
