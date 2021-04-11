@@ -7,7 +7,24 @@ features are implemented:
 * Reading power measurement info
 
 ## Usage
+### Add dependency
+The project is published on [maven central](https://search.maven.org/artifact/net.draal.home/hs1xx).
 
+#### Maven
+```xml
+<dependency>
+  <groupId>net.draal.home</groupId>
+  <artifactId>hs1xx</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+#### Gradle
+```groovy
+implementation 'net.draal.home:hs1xx:1.0.0'
+```
+
+### Usage sample
 ```java
 public class Introduction {
  public static void main(String[] args) {
