@@ -81,10 +81,10 @@ afterReleaseBuild.dependsOn publish
 
 dependencies {
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
-    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
-    implementation group: 'com.google.guava', name: 'guava', version: '30.1-jre'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.1'
+    implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.35'
+    implementation group: 'com.google.guava', name: 'guava', version: '31.0.1-jre'
     compileOnly group: 'net.jcip', name: 'jcip-annotations', version: '1.0'
     compileOnly group: 'com.github.spotbugs', name: 'spotbugs-annotations', version: '4.2.0'
 

@@ -15,13 +15,13 @@ The project is published on [maven central](https://search.maven.org/artifact/ne
 <dependency>
   <groupId>net.draal.home</groupId>
   <artifactId>hs1xx</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
 #### Gradle
 ```groovy
-implementation 'net.draal.home:hs1xx:1.0.0'
+implementation 'net.draal.home:hs1xx:1.0.2'
 ```
 
 ### Usage sample
