@@ -19,7 +19,7 @@ public class DayPowerStatsConverter implements CommandResponseConverter<DayPower
         Preconditions.checkArgument(commandContainer.getEmeter().getDaystatCommand() != null);
         DaystatCommand daystatCommand = commandContainer.getEmeter().getDaystatCommand();
         return DayPowerStats.builder()
-                .days(asTimePowerStats(daystatCommand.getDayList()))
+                .days(asTimePowerStats(daystatCommand.dayList()))
                 .build();
     }
 

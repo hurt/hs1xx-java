@@ -29,7 +29,7 @@ public class Hs1xxRequestFactory {
     }
 
     public static CommandContainer getDailyPowerStats(int year, int month) {
-        return new CommandContainer().setEmeter(new EmeterContainer().setDaystatCommand(new DaystatCommand().setYear(year).setMonth(month)));
+        return new CommandContainer().setEmeter(new EmeterContainer().setDaystatCommand(DaystatCommand.builder().year(year).month(month).build()));
     }
 
     public static CommandContainer getMonthlyPowerStats(int year) {

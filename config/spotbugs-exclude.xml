@@ -6,5 +6,8 @@
     <Match>
         <Source name="~.*\.groovy"/>
     </Match>
+    <Match>
+        <Bug code="EI,EI2"/>
+    </Match>
 </FindBugsFilter>
 
