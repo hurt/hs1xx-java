@@ -2,6 +2,7 @@
 This is a java client for TP-Link smart plugs of the HS1xx device family. Currently, only the following 
 features are implemented:
 * Relay control
+* LED control
 * Device Reboot
 * Reading general system information
 * Reading power measurement info
@@ -15,13 +16,13 @@ The project is published on [maven central](https://search.maven.org/artifact/ne
 <dependency>
   <groupId>net.draal.home</groupId>
   <artifactId>hs1xx</artifactId>
-  <version>1.0.2</version>
+  <version>2.0.0</version>
 </dependency>
 ```
 
 #### Gradle
 ```groovy
-implementation 'net.draal.home:hs1xx:1.0.2'
+implementation 'net.draal.home:hs1xx:2.0.0'
 ```
 
 ### Usage sample
@@ -77,7 +78,7 @@ I am trying to keep the number of runtime dependencies of this library reasonabl
 to very common packages (guava, apache commons, jackson-databind) which are probably present in most
 java projects anyways.
 
-Minimum JDK version is 11 at the moment. I have no plans to raise it any time soon.
+Minimum JDK version is 17 at the moment.
 
 ## (probably) FAQ
 ### Why is device feature X not implemented?
