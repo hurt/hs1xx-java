@@ -7,6 +7,7 @@ import net.draal.home.hs1xx.apimodel.model.TimeContainer;
 import net.draal.home.hs1xx.apimodel.model.emeter.DaystatCommand;
 import net.draal.home.hs1xx.apimodel.model.emeter.MonthstatCommand;
 import net.draal.home.hs1xx.apimodel.model.emeter.RealtimeCommand;
+import net.draal.home.hs1xx.apimodel.model.system.LedStateCommand;
 import net.draal.home.hs1xx.apimodel.model.system.RelayStateCommand;
 import net.draal.home.hs1xx.apimodel.model.system.SysinfoCommand;
 import net.draal.home.hs1xx.apimodel.model.time.GetTimeCommand;
@@ -26,6 +27,10 @@ public class Hs1xxRequestFactory {
 
     public static CommandContainer setRelayState(boolean state) {
         return CommandContainer.of(SystemContainer.of(RelayStateCommand.ofState(state ? 1 : 0)));
+    }
+
+    public static CommandContainer setLedState(boolean state) {
+        return CommandContainer.of(SystemContainer.of(LedStateCommand.builder().off(state ? 0 : 1).build()));
     }
 
     public static CommandContainer getDailyPowerStats(int year, int month) {

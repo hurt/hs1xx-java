@@ -73,6 +73,28 @@ class Hs1xxFacadeTest extends Specification {
         true
     }
 
+    def 'set LED on'() {
+        given:
+        service.setFlow(SimpleFlow.getFlow(getResourceUri('testdata/ledon.yaml')))
+
+        when:
+        hs1xxFacade.setLedState(mockDevice, true)
+
+        then:
+        true
+    }
+
+    def 'set LED off'() {
+        given:
+        service.setFlow(SimpleFlow.getFlow(getResourceUri('testdata/ledoff.yaml')))
+
+        when:
+        hs1xxFacade.setLedState(mockDevice, false)
+
+        then:
+        true
+    }
+
     def 'get system info'() {
         given:
         service.setFlow(SimpleFlow.getFlow(getResourceUri('testdata/sysinfo.yaml')))

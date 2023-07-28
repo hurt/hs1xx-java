@@ -5,16 +5,11 @@ import lombok.Builder;
 @Builder
 public record CommandContainer(
         SystemContainer system,
-        CloudContainer cnCloud,
         EmeterContainer emeter,
         TimeContainer time
 ) {
     public static CommandContainer of(SystemContainer system) {
         return CommandContainer.builder().system(system).build();
-    }
-
-    public static CommandContainer of(CloudContainer cloud) {
-        return CommandContainer.builder().cnCloud(cloud).build();
     }
 
     public static CommandContainer of(EmeterContainer emeter) {

@@ -56,6 +56,11 @@ public class Hs1xxFacade {
         sendInternal(device, request);
     }
 
+    public void setLedState(Device device, boolean state) {
+        CommandContainer request = Hs1xxRequestFactory.setLedState(state);
+        sendInternal(device, request);
+    }
+
     private void sendInternal(Device device, CommandContainer request) {
         deviceClient.send(device, request);
     }
