@@ -1,6 +1,7 @@
 package net.draal.home.hs1xx.service.impl;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.NonNull;
 import net.draal.home.hs1xx.service.Device;
 
 @Builder(builderClassName = "Hs1xxDeviceBuilder")

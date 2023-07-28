@@ -12,8 +12,6 @@ import net.draal.home.hs1xx.service.converters.*;
 import net.draal.home.hs1xx.service.data.*;
 import net.draal.home.hs1xx.service.exception.Hs1xxException;
 
-import java.time.LocalDateTime;
-
 @SuppressWarnings("UnstableApiUsage")
 @Slf4j
 public class Hs1xxResponseConversionService implements ResponseConversionService {

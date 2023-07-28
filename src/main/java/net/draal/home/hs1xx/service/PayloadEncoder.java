@@ -8,6 +8,13 @@ import net.draal.home.hs1xx.service.impl.Hs1xxPayloadEncoder;
  */
 public interface PayloadEncoder {
     /**
+     * @return Default implementation of this interface
+     */
+    static PayloadEncoder getDefault() {
+        return new Hs1xxPayloadEncoder();
+    }
+
+    /**
      * Encodes the given string to a low-level device request
      *
      * @param message Given string request
@@ -30,11 +37,4 @@ public interface PayloadEncoder {
      * @return header value (length of the payload)
      */
     int readHeader(byte[] header);
-
-    /**
-     * @return Default implementation of this interface
-     */
-    static PayloadEncoder getDefault() {
-        return new Hs1xxPayloadEncoder();
-    }
 }
