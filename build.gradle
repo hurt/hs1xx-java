@@ -74,6 +74,7 @@ signing {
 release {
     git {
         signTag.set(true)
+        requireBranch.set('master')
     }
 }
 
