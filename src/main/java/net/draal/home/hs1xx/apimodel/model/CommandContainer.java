@@ -1,7 +1,6 @@
 package net.draal.home.hs1xx.apimodel.model;
 
 import lombok.Builder;
-import lombok.Data;
 
 @Builder
 public record CommandContainer(

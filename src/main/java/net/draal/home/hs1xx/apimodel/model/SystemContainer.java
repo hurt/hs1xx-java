@@ -2,7 +2,6 @@ package net.draal.home.hs1xx.apimodel.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
-import lombok.Data;
 import net.draal.home.hs1xx.apimodel.model.system.LedStateCommand;
 import net.draal.home.hs1xx.apimodel.model.system.RelayStateCommand;
 import net.draal.home.hs1xx.apimodel.model.system.SysinfoCommand;

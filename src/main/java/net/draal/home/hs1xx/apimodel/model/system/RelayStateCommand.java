@@ -9,7 +9,7 @@ public record RelayStateCommand(
         @JsonProperty("err_code") Integer errCode,
         @JsonProperty("next_action") NextAction nextAction,
         Integer state
-)  {
+) {
     public static RelayStateCommand ofState(Integer state) {
         return RelayStateCommand.builder().state(state).build();
     }
