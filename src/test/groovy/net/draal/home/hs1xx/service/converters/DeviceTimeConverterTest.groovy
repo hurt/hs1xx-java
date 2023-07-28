@@ -6,7 +6,9 @@ import net.draal.home.hs1xx.apimodel.model.time.GetTimeCommand
 import net.draal.home.hs1xx.service.data.DeviceTime
 import spock.lang.Specification
 
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 
 class DeviceTimeConverterTest extends Specification {
     DeviceTimeConverter deviceTimeConverter
@@ -17,16 +19,18 @@ class DeviceTimeConverterTest extends Specification {
 
     def 'all data converted as expected'() {
         given:
-        def givenData = new CommandContainer().setTime(new TimeContainer().setGetTimeCommand(new GetTimeCommand()
-                .setYear(2021)
-                .setMonth(02)
-                .setMday(20)
-                .setHour(6)
-                .setMin(56)
-                .setSec(41)
+        def givenData = CommandContainer.of(TimeContainer.of(GetTimeCommand.builder()
+                .year(2021)
+                .month(02)
+                .mday(20)
+                .hour(6)
+                .min(56)
+                .sec(41)
+                .build()
         ))
         def expectedResult = DeviceTime.builder()
-                .time(LocalDateTime.of(2021, 02, 20, 6, 56, 41))
+                .date(LocalDate.of(2021, 02, 20))
+                .time(LocalTime.of(6, 56, 41))
                 .build()
 
         when:
@@ -38,7 +42,7 @@ class DeviceTimeConverterTest extends Specification {
 
     def 'if time is null, exception is thrown'() {
         given:
-        def givenData = new CommandContainer()
+        def givenData = CommandContainer.of((TimeContainer) null)
 
         when:
         deviceTimeConverter.convert(givenData)
@@ -49,7 +53,7 @@ class DeviceTimeConverterTest extends Specification {
 
     def 'if getTimeCommand is null, exception is thrown'() {
         given:
-        def givenData = new CommandContainer().setTime(new TimeContainer())
+        def givenData = CommandContainer.of(TimeContainer.of(null))
 
         when:
         deviceTimeConverter.convert(givenData)

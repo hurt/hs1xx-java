@@ -10,7 +10,7 @@ public interface DeviceClient {
     /**
      * Sends the given request to the given device and returns the response
      *
-     * @param device The given device
+     * @param device  The given device
      * @param request Request payload to be sent to the device
      * @return response from device
      * @throws Hs1xxException in case of any failure

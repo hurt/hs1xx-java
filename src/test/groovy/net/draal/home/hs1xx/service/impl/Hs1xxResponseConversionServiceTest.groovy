@@ -10,7 +10,7 @@ import spock.lang.Unroll
 class Hs1xxResponseConversionServiceTest extends Specification {
     Hs1xxResponseConversionService responseConversionService
 
-    CommandContainer commandContainer = Mock(CommandContainer)
+    CommandContainer commandContainer = CommandContainer.builder().build()
     CommandResponseConverter dummyConverter = Mock(CommandResponseConverter)
 
     DummyObject dummyObject = new DummyObject()
@@ -39,7 +39,7 @@ class Hs1xxResponseConversionServiceTest extends Specification {
 
     def 'register converter replaces existing converter'() {
         given:
-        def givenTarget = Mock(DayPowerStats)
+        def givenTarget = DayPowerStats.builder().build()
         responseConversionService.registerConverter(DayPowerStats, Mock(CommandResponseConverter))
 
         when:

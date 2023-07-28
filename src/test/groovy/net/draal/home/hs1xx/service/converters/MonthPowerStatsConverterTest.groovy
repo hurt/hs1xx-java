@@ -19,13 +19,13 @@ class MonthPowerStatsConverterTest extends Specification {
 
     def 'all data converted as expected'() {
         given:
-        def givenData = new CommandContainer().setEmeter(
-                new EmeterContainer().setMonthstatCommand(new MonthstatCommand().setMonthList(
+        def givenData = CommandContainer.of(
+                EmeterContainer.of(MonthstatCommand.builder().monthList(
                         List.of(
-                                new EnergyDay().setYear(2020).setMonth(10).setEnergyWh(123),
-                                new EnergyDay().setYear(2020).setMonth(11).setEnergyWh(223),
-                                new EnergyDay().setYear(2020).setMonth(12).setEnergyWh(323),
-                        ))))
+                                EnergyDay.builder().year(2020).month(10).energyWh(123).build(),
+                                EnergyDay.builder().year(2020).month(11).energyWh(223).build(),
+                                EnergyDay.builder().year(2020).month(12).energyWh(323).build(),
+                        )).build()))
         def expectedResult = MonthPowerStats.builder()
                 .months(List.of(
                         TimePowerStats.builder().date(LocalDate.of(2020, 10, 1)).energy(123d).build(),
@@ -42,8 +42,8 @@ class MonthPowerStatsConverterTest extends Specification {
 
     def 'null list in DTO is handled gracefully'() {
         given:
-        def givenData = new CommandContainer().setEmeter(
-                new EmeterContainer().setMonthstatCommand(new MonthstatCommand()))
+        def givenData = CommandContainer.of(
+                EmeterContainer.of(MonthstatCommand.builder().build()))
         def expectedResult = MonthPowerStats.builder().months([]).build()
 
         when:
@@ -55,7 +55,7 @@ class MonthPowerStatsConverterTest extends Specification {
 
     def 'if emeter is null in given DTO, exception is thrown'() {
         given:
-        def givenData = new CommandContainer()
+        def givenData = CommandContainer.of((EmeterContainer) null)
 
         when:
         monthPowerStatsConverter.convert(givenData)
@@ -66,7 +66,7 @@ class MonthPowerStatsConverterTest extends Specification {
 
     def 'if monthstat is null in given DTO, exception is thrown'() {
         given:
-        def givenData = new CommandContainer().setEmeter(new EmeterContainer())
+        def givenData = CommandContainer.of(EmeterContainer.of((MonthstatCommand) null))
 
         when:
         monthPowerStatsConverter.convert(givenData)

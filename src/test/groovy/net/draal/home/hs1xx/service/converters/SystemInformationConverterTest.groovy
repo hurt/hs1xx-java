@@ -2,6 +2,7 @@ package net.draal.home.hs1xx.service.converters
 
 import net.draal.home.hs1xx.apimodel.model.CommandContainer
 import net.draal.home.hs1xx.apimodel.model.SystemContainer
+import net.draal.home.hs1xx.apimodel.model.system.SysinfoCommand
 import net.draal.home.hs1xx.service.data.SystemInformation
 import net.draal.home.hs1xx.service.impl.Hs1xxObjectMapperFactory
 import spock.lang.Specification
@@ -18,7 +19,7 @@ class SystemInformationConverterTest extends Specification {
 
     def 'if system is null in given DTO, exception is thrown'() {
         given:
-        def givenData = new CommandContainer()
+        def givenData = CommandContainer.of((SystemContainer) null)
 
         when:
         systemInformationConverter.convert(givenData)
@@ -29,7 +30,7 @@ class SystemInformationConverterTest extends Specification {
 
     def 'if sysinfo is null in given DTO, exception is thrown'() {
         given:
-        def givenData = new CommandContainer().setSystem(new SystemContainer())
+        def givenData = CommandContainer.of(SystemContainer.of((SysinfoCommand) null))
 
         when:
         systemInformationConverter.convert(givenData)

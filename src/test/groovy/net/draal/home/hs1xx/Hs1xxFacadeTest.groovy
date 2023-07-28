@@ -73,6 +73,28 @@ class Hs1xxFacadeTest extends Specification {
         true
     }
 
+    def 'set LED on'() {
+        given:
+        service.setFlow(SimpleFlow.getFlow(getResourceUri('testdata/ledon.yaml')))
+
+        when:
+        hs1xxFacade.setLedState(mockDevice, true)
+
+        then:
+        true
+    }
+
+    def 'set LED off'() {
+        given:
+        service.setFlow(SimpleFlow.getFlow(getResourceUri('testdata/ledoff.yaml')))
+
+        when:
+        hs1xxFacade.setLedState(mockDevice, false)
+
+        then:
+        true
+    }
+
     def 'get system info'() {
         given:
         service.setFlow(SimpleFlow.getFlow(getResourceUri('testdata/sysinfo.yaml')))
@@ -126,10 +148,10 @@ class Hs1xxFacadeTest extends Specification {
         service.setFlow(SimpleFlow.getFlow(getResourceUri('testdata/time.yaml')))
 
         when:
-        def time = hs1xxFacade.getDeviceTime(mockDevice)
+        def deviceTime = hs1xxFacade.getDeviceTime(mockDevice)
 
         then:
-        time.getTime() == LocalDateTime.of(2021, 2, 20, 6, 34, 41)
+        deviceTime.asLocalDateTime() == LocalDateTime.of(2021, 2, 20, 6, 34, 41)
     }
 
     def 'thrown exception is handled'() {

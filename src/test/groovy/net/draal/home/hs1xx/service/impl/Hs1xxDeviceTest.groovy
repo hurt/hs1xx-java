@@ -14,9 +14,9 @@ class Hs1xxDeviceTest extends Specification {
         then:
         with(actualDevice) {
             verifyAll {
-                host == HOST
-                port == EX_DEFAULT_PORT
-                socketTimeout == EX_DEFAULT_TIMEOUT
+                host() == HOST
+                port() == EX_DEFAULT_PORT
+                socketTimeout() == EX_DEFAULT_TIMEOUT
             }
         }
     }
@@ -40,9 +40,9 @@ class Hs1xxDeviceTest extends Specification {
         then:
         with(actualDevice) {
             verifyAll {
-                host == HOST
-                port == givenPort
-                socketTimeout == givenTimeout
+                host() == HOST
+                port() == givenPort
+                socketTimeout() == givenTimeout
             }
         }
     }

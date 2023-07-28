@@ -7,15 +7,15 @@ public interface Device {
     /**
      * @return host (name or IP) of the device
      */
-    String getHost();
+    String host();
 
     /**
      * @return port number on which the device listens to
      */
-    int getPort();
+    int port();
 
     /**
      * @return Socket timeout in ms
      */
-    int getSocketTimeout();
+    int socketTimeout();
 }

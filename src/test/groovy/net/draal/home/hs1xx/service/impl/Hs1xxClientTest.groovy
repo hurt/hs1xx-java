@@ -27,8 +27,8 @@ class Hs1xxClientTest extends Specification {
     Hs1xxClient client
 
     Device mockDevice = Mock(Device)
-    CommandContainer mockRequest = Mock(CommandContainer)
-    CommandContainer mockResponse = Mock(CommandContainer)
+    CommandContainer mockRequest = CommandContainer.builder().build()
+    CommandContainer mockResponse = CommandContainer.builder().build()
     Socket mockSocket = Mock(Socket)
     OutputStream mockOutputStream = Mock(OutputStream)
     InputStream mockInputStream = Mock(InputStream)

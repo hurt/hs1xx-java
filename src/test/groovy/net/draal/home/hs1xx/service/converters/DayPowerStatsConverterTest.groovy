@@ -4,6 +4,7 @@ import net.draal.home.hs1xx.apimodel.model.CommandContainer
 import net.draal.home.hs1xx.apimodel.model.EmeterContainer
 import net.draal.home.hs1xx.apimodel.model.emeter.DaystatCommand
 import net.draal.home.hs1xx.apimodel.model.emeter.EnergyDay
+import net.draal.home.hs1xx.apimodel.model.emeter.MonthstatCommand
 import net.draal.home.hs1xx.service.data.DayPowerStats
 import net.draal.home.hs1xx.service.data.TimePowerStats
 import spock.lang.Specification
@@ -19,13 +20,14 @@ class DayPowerStatsConverterTest extends Specification {
 
     def 'all data converted as expected'() {
         given:
-        def givenData = new CommandContainer().setEmeter(new EmeterContainer().setDaystatCommand(new DaystatCommand()
-                .setDayList([
-                        new EnergyDay().setYear(2020).setMonth(8).setDay(1).setEnergyWh(458),
-                        new EnergyDay().setYear(2020).setMonth(8).setDay(2).setEnergyWh(358),
-                        new EnergyDay().setYear(2020).setMonth(8).setDay(3).setEnergyWh(258),
-                        new EnergyDay().setYear(2020).setMonth(8).setDay(4).setEnergyWh(158)
-                ])))
+        def givenData = CommandContainer.of(EmeterContainer.of(DaystatCommand.builder()
+                .dayList([
+                        EnergyDay.builder().year(2020).month(8).day(1).energyWh(458).build(),
+                        EnergyDay.builder().year(2020).month(8).day(2).energyWh(358).build(),
+                        EnergyDay.builder().year(2020).month(8).day(3).energyWh(258).build(),
+                        EnergyDay.builder().year(2020).month(8).day(4).energyWh(158).build()
+                ]).build()
+        ))
         def expectedResult = DayPowerStats.builder()
                 .days([
                         TimePowerStats.builder().date(LocalDate.of(2020, 8, 1)).energy(458).build(),
@@ -43,8 +45,8 @@ class DayPowerStatsConverterTest extends Specification {
 
     def 'null list in DTO is handled gracefully'() {
         given:
-        def givenData = new CommandContainer().setEmeter(
-                new EmeterContainer().setDaystatCommand(new DaystatCommand()))
+        def givenData = CommandContainer.of(
+                EmeterContainer.of(DaystatCommand.builder().build()))
         def expectedResult = DayPowerStats.builder().days([]).build()
 
         when:
@@ -56,7 +58,7 @@ class DayPowerStatsConverterTest extends Specification {
 
     def 'if emeter is null in given DTO, exception is thrown'() {
         given:
-        def givenData = new CommandContainer()
+        def givenData = CommandContainer.of((EmeterContainer) null)
 
         when:
         dayPowerStatsConverter.convert(givenData)
@@ -67,7 +69,7 @@ class DayPowerStatsConverterTest extends Specification {
 
     def 'if monthstat is null in given DTO, exception is thrown'() {
         given:
-        def givenData = new CommandContainer().setEmeter(new EmeterContainer())
+        def givenData = CommandContainer.of(EmeterContainer.of((MonthstatCommand) null))
 
         when:
         dayPowerStatsConverter.convert(givenData)

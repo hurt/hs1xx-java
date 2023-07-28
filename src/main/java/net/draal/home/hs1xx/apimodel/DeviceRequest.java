@@ -27,7 +27,7 @@ public class DeviceRequest {
         return "DeviceRequest{" +
                 "header=0x" + Hex.encodeHexString(header) +
                 ", payload=0x" + Hex.encodeHexString(payload) +
-                ", reqlen=" + String.valueOf(payload.length + header.length) +
+                ", reqlen=" + (payload.length + header.length) +
                 '}';
     }
 
