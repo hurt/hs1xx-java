@@ -11,11 +11,11 @@ public class SystemInformationConverter implements CommandResponseConverter<Syst
 
     @Override
     public SystemInformation convert(CommandContainer commandContainer) {
-        Preconditions.checkArgument(commandContainer.getSystem() != null);
-        Preconditions.checkArgument(commandContainer.getSystem().getSysinfoCommand() != null);
-        SysinfoCommand sysinfoCommand = commandContainer.getSystem().getSysinfoCommand();
+        Preconditions.checkArgument(commandContainer.system() != null);
+        Preconditions.checkArgument(commandContainer.system().sysinfoCommand() != null);
+        SysinfoCommand sysinfoCommand = commandContainer.system().sysinfoCommand();
         return SystemInformation.builder()
-                .alias(sysinfoCommand.getAlias())
+                .alias(sysinfoCommand.alias())
                 .vendorProperties(getVendorProperties(sysinfoCommand))
                 .location(getLocation(sysinfoCommand))
                 .deviceState(getDeviceState(sysinfoCommand))
@@ -25,41 +25,41 @@ public class SystemInformationConverter implements CommandResponseConverter<Syst
 
     private SystemInformation.NetworkInfo getNetworkInfo(SysinfoCommand sysinfoCommand) {
         return SystemInformation.NetworkInfo.builder()
-                .macAddress(sysinfoCommand.getMac())
-                .rssi(sysinfoCommand.getRssi())
+                .macAddress(sysinfoCommand.mac())
+                .rssi(sysinfoCommand.rssi())
                 .build();
     }
 
     private SystemInformation.DeviceState getDeviceState(SysinfoCommand sysinfoCommand) {
         return SystemInformation.DeviceState.builder()
-                .status(sysinfoCommand.getStatus())
-                .updating(ConverterUtil.asBoolean(sysinfoCommand.getUpdating()))
-                .ledDisabled(ConverterUtil.asBoolean(sysinfoCommand.getLedOff()))
-                .relayEnabled(ConverterUtil.asBoolean(sysinfoCommand.getRelayState()))
-                .relayEnabledSince(ConverterUtil.asDuration(sysinfoCommand.getOnTime()))
-                .activeMode(sysinfoCommand.getActiveMode())
-                .iconHash(sysinfoCommand.getIconHash())
+                .status(sysinfoCommand.status())
+                .updating(ConverterUtil.asBoolean(sysinfoCommand.updating()))
+                .ledDisabled(ConverterUtil.asBoolean(sysinfoCommand.ledOff()))
+                .relayEnabled(ConverterUtil.asBoolean(sysinfoCommand.relayState()))
+                .relayEnabledSince(ConverterUtil.asDuration(sysinfoCommand.onTime()))
+                .activeMode(sysinfoCommand.activeMode())
+                .iconHash(sysinfoCommand.iconHash())
                 .build();
     }
 
     private SystemInformation.VendorProperties getVendorProperties(SysinfoCommand sysinfoCommand) {
         return SystemInformation.VendorProperties.builder()
-                .firmwareVersion(sysinfoCommand.getSwVer())
-                .hardwareVersion(sysinfoCommand.getHwVer())
-                .model(sysinfoCommand.getModel())
-                .deviceId(sysinfoCommand.getDeviceId())
-                .oemId(sysinfoCommand.getOemId())
-                .hardwareId(sysinfoCommand.getHwId())
-                .micType(sysinfoCommand.getMicType())
-                .feature(sysinfoCommand.getFeature())
-                .deviceName(sysinfoCommand.getDevName())
+                .firmwareVersion(sysinfoCommand.swVer())
+                .hardwareVersion(sysinfoCommand.hwVer())
+                .model(sysinfoCommand.model())
+                .deviceId(sysinfoCommand.deviceId())
+                .oemId(sysinfoCommand.oemId())
+                .hardwareId(sysinfoCommand.hwId())
+                .micType(sysinfoCommand.micType())
+                .feature(sysinfoCommand.feature())
+                .deviceName(sysinfoCommand.devName())
                 .build();
     }
 
     private SystemInformation.Location getLocation(SysinfoCommand sysinfoCommand) {
         return SystemInformation.Location.builder()
-                .latitude(asCoordinate(sysinfoCommand.getLatitude()))
-                .longitude(asCoordinate(sysinfoCommand.getLongitude()))
+                .latitude(asCoordinate(sysinfoCommand.latitude()))
+                .longitude(asCoordinate(sysinfoCommand.longitude()))
                 .build();
     }
 

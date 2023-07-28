@@ -15,13 +15,12 @@ class RealtimePowerStatsConverterTest extends Specification {
 
     def 'all data converted as expected'() {
         given:
-        def givenCommandContainer = new CommandContainer()
-                .setEmeter(new EmeterContainer()
-                        .setRealtimeCommand(new RealtimeCommand()
-                                .setPowerMw(25_000)
-                                .setCurrentMa(120)
-                                .setVoltageMv(231_987)
-                                .setTotalWh(548)
+        def givenCommandContainer = CommandContainer.of(EmeterContainer.of(RealtimeCommand.builder()
+                                .powerMw(25_000)
+                                .currentMa(120)
+                                .voltageMv(231_987)
+                                .totalWh(548)
+                                .build()
                         ))
         def expectedResult = RealtimePowerStats.builder()
                 .power(25d)
@@ -39,7 +38,7 @@ class RealtimePowerStatsConverterTest extends Specification {
 
     def 'all fields in dto are null, no exception is thrown'() {
         given:
-        def givenCommandContainer = new CommandContainer().setEmeter(new EmeterContainer().setRealtimeCommand(new RealtimeCommand()))
+        def givenCommandContainer = CommandContainer.of(EmeterContainer.of(RealtimeCommand.empty()))
         def expectedResult = RealtimePowerStats.builder().build()
 
         when:
@@ -51,7 +50,7 @@ class RealtimePowerStatsConverterTest extends Specification {
 
     def 'given DTO does not have emeter attribute'() {
         given:
-        def givenCommandContainer = new CommandContainer()
+        def givenCommandContainer = CommandContainer.of((EmeterContainer) null)
 
         when:
         realtimePowerStatsConverter.convert(givenCommandContainer)
@@ -62,7 +61,7 @@ class RealtimePowerStatsConverterTest extends Specification {
 
     def 'given DTO does not have realtime attribute'() {
         given:
-        def givenCommandContainer = new CommandContainer().setEmeter(new EmeterContainer())
+        def givenCommandContainer = CommandContainer.of(EmeterContainer.of((RealtimeCommand) null))
 
         when:
         realtimePowerStatsConverter.convert(givenCommandContainer)

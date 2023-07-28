@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 public class MonthPowerStatsConverter implements CommandResponseConverter<MonthPowerStats> {
     @Override
     public MonthPowerStats convert(CommandContainer commandContainer) {
-        Preconditions.checkArgument(commandContainer.getEmeter() != null);
-        Preconditions.checkArgument(commandContainer.getEmeter().getMonthstatCommand() != null);
-        MonthstatCommand monthstatCommand = commandContainer.getEmeter().getMonthstatCommand();
+        Preconditions.checkArgument(commandContainer.emeter() != null);
+        Preconditions.checkArgument(commandContainer.emeter().monthstatCommand() != null);
+        MonthstatCommand monthstatCommand = commandContainer.emeter().monthstatCommand();
         return MonthPowerStats.builder()
-                .months(asTimePowerStats(monthstatCommand.getMonthList()))
+                .months(asTimePowerStats(monthstatCommand.monthList()))
                 .build();
     }
 

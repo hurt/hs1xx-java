@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 public class DayPowerStatsConverter implements CommandResponseConverter<DayPowerStats> {
     @Override
     public DayPowerStats convert(CommandContainer commandContainer) {
-        Preconditions.checkArgument(commandContainer.getEmeter() != null);
-        Preconditions.checkArgument(commandContainer.getEmeter().getDaystatCommand() != null);
-        DaystatCommand daystatCommand = commandContainer.getEmeter().getDaystatCommand();
+        Preconditions.checkArgument(commandContainer.emeter() != null);
+        Preconditions.checkArgument(commandContainer.emeter().daystatCommand() != null);
+        DaystatCommand daystatCommand = commandContainer.emeter().daystatCommand();
         return DayPowerStats.builder()
                 .days(asTimePowerStats(daystatCommand.dayList()))
                 .build();

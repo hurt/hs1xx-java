@@ -1,14 +1,21 @@
 package net.draal.home.hs1xx.apimodel.model.time;
 
-import lombok.Data;
-import net.draal.home.hs1xx.apimodel.model.shared.AbstractCommand;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import net.draal.home.hs1xx.apimodel.model.shared.NextAction;
 
-@Data
-public class GetTimeCommand extends AbstractCommand {
-    private Integer year;
-    private Integer month;
-    private Integer mday;
-    private Integer hour;
-    private Integer min;
-    private Integer sec;
+@Builder
+public record GetTimeCommand(
+        @JsonProperty("err_code") Integer errCode,
+        @JsonProperty("next_action") NextAction nextAction,
+        Integer year,
+        Integer month,
+        Integer mday,
+        Integer hour,
+        Integer min,
+        Integer sec
+) {
+    public static GetTimeCommand empty() {
+        return GetTimeCommand.builder().build();
+    }
 }

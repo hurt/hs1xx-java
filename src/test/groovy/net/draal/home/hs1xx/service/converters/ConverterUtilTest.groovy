@@ -131,11 +131,12 @@ class ConverterUtilTest extends Specification {
     }
 
     static getEnergyDay(Integer year, Integer month, Integer day, Integer energy) {
-        new EnergyDay()
-                .setYear(year)
-                .setMonth(month)
-                .setDay(day)
-                .setEnergyWh(energy)
+        EnergyDay.builder()
+                .year(year)
+                .month(month)
+                .day(day)
+                .energyWh(energy)
+                .build()
     }
 
     static getPowerStats(int year, int month, int day, Double energy) {

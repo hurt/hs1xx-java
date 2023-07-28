@@ -51,12 +51,12 @@ public class ConverterUtil {
         if (energyDay == null) {
             return null;
         }
-        Preconditions.checkArgument(energyDay.getYear() != null, "Year can not be null");
-        int year = energyDay.getYear();
-        int month = Objects.requireNonNullElse(energyDay.getMonth(), 1);
-        int day = Objects.requireNonNullElse(energyDay.getDay(), 1);
+        Preconditions.checkArgument(energyDay.year() != null, "Year can not be null");
+        int year = energyDay.year();
+        int month = Objects.requireNonNullElse(energyDay.month(), 1);
+        int day = Objects.requireNonNullElse(energyDay.day(), 1);
         return TimePowerStats.builder()
-                .energy(asDouble(energyDay.getEnergyWh()))
+                .energy(asDouble(energyDay.energyWh()))
                 .date(LocalDate.of(year, month, day))
                 .build();
     }

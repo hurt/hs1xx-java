@@ -1,8 +1,9 @@
 package net.draal.home.hs1xx.apimodel.model.shared;
 
-import lombok.Data;
+import lombok.Builder;
 
-@Data
-public class NextAction {
-    private Integer type;
+@Builder
+public record NextAction(
+        Integer type
+) {
 }

@@ -1,20 +1,22 @@
 package net.draal.home.hs1xx.apimodel.model.cloud;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
-import net.draal.home.hs1xx.apimodel.model.shared.AbstractCommand;
+import lombok.Builder;
+import net.draal.home.hs1xx.apimodel.model.shared.NextAction;
 
-@Data
-public class CloudInfoCommand extends AbstractCommand {
-    private String username;
-    private String server;
-    private Integer binded;
-    @JsonProperty("cld_connection")
-    private Integer cldConnection;
-    private Integer illegalType;
-    private Integer stopConnect;
-    private Integer tcspStatus;
-    private String fwDlPage;
-    private String tcspInfo;
-    private Integer fwNotifyType;
+@Builder
+public record CloudInfoCommand(
+        @JsonProperty("err_code") Integer errCode,
+        @JsonProperty("next_action") NextAction nextAction,
+        String username,
+        String server,
+        Integer binded,
+        @JsonProperty("cld_connection") Integer cldConnection,
+        Integer illegalType,
+        Integer stopConnect,
+        Integer tcspStatus,
+        String fwDlPage,
+        String tcspInfo,
+        Integer fwNotifyType
+) {
 }

@@ -17,13 +17,14 @@ class DeviceTimeConverterTest extends Specification {
 
     def 'all data converted as expected'() {
         given:
-        def givenData = new CommandContainer().setTime(new TimeContainer().setGetTimeCommand(new GetTimeCommand()
-                .setYear(2021)
-                .setMonth(02)
-                .setMday(20)
-                .setHour(6)
-                .setMin(56)
-                .setSec(41)
+        def givenData = CommandContainer.of(TimeContainer.of(GetTimeCommand.builder()
+                .year(2021)
+                .month(02)
+                .mday(20)
+                .hour(6)
+                .min(56)
+                .sec(41)
+                .build()
         ))
         def expectedResult = DeviceTime.builder()
                 .time(LocalDateTime.of(2021, 02, 20, 6, 56, 41))
@@ -38,7 +39,7 @@ class DeviceTimeConverterTest extends Specification {
 
     def 'if time is null, exception is thrown'() {
         given:
-        def givenData = new CommandContainer()
+        def givenData = CommandContainer.of((TimeContainer) null)
 
         when:
         deviceTimeConverter.convert(givenData)
@@ -49,7 +50,7 @@ class DeviceTimeConverterTest extends Specification {
 
     def 'if getTimeCommand is null, exception is thrown'() {
         given:
-        def givenData = new CommandContainer().setTime(new TimeContainer())
+        def givenData = CommandContainer.of(TimeContainer.of(null))
 
         when:
         deviceTimeConverter.convert(givenData)

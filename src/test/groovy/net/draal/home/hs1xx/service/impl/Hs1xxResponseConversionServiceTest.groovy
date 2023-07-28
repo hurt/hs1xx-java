@@ -10,7 +10,7 @@ import spock.lang.Unroll
 class Hs1xxResponseConversionServiceTest extends Specification {
     Hs1xxResponseConversionService responseConversionService
 
-    CommandContainer commandContainer = Mock(CommandContainer)
+    CommandContainer commandContainer = CommandContainer.builder().build()
     CommandResponseConverter dummyConverter = Mock(CommandResponseConverter)
 
     DummyObject dummyObject = new DummyObject()

@@ -11,16 +11,16 @@ import java.time.LocalDateTime;
 public class DeviceTimeConverter implements CommandResponseConverter<DeviceTime> {
     @Override
     public DeviceTime convert(CommandContainer commandContainer) {
-        Preconditions.checkArgument(commandContainer.getTime() != null);
-        Preconditions.checkArgument(commandContainer.getTime().getGetTimeCommand() != null);
+        Preconditions.checkArgument(commandContainer.time() != null);
+        Preconditions.checkArgument(commandContainer.time().getTimeCommand() != null);
 
         return DeviceTime.builder()
-                .time(asLocalDateTime(commandContainer.getTime().getGetTimeCommand()))
+                .time(asLocalDateTime(commandContainer.time().getTimeCommand()))
                 .build();
     }
 
     private LocalDateTime asLocalDateTime(GetTimeCommand getTimeCommand) {
-        return LocalDateTime.of(getTimeCommand.getYear(), getTimeCommand.getMonth(), getTimeCommand.getMday(),
-                getTimeCommand.getHour(), getTimeCommand.getMin(), getTimeCommand.getSec());
+        return LocalDateTime.of(getTimeCommand.year(), getTimeCommand.month(), getTimeCommand.mday(),
+                getTimeCommand.hour(), getTimeCommand.min(), getTimeCommand.sec());
     }
 }

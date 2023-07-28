@@ -17,26 +17,26 @@ public class Hs1xxRequestFactory {
     }
 
     public static CommandContainer getRealtimePowerStats() {
-        return new CommandContainer().setEmeter(new EmeterContainer().setRealtimeCommand(new RealtimeCommand()));
+        return CommandContainer.of(EmeterContainer.of(RealtimeCommand.empty()));
     }
 
     public static CommandContainer getSystemInfo() {
-        return new CommandContainer().setSystem(new SystemContainer().setSysinfoCommand(new SysinfoCommand()));
+        return CommandContainer.of(SystemContainer.of(SysinfoCommand.empty()));
     }
 
     public static CommandContainer setRelayState(boolean state) {
-        return new CommandContainer().setSystem(new SystemContainer().setRelayStateCommand(new RelayStateCommand().setState(state ? 1 : 0)));
+        return CommandContainer.of(SystemContainer.of(RelayStateCommand.ofState(state ? 1 : 0)));
     }
 
     public static CommandContainer getDailyPowerStats(int year, int month) {
-        return new CommandContainer().setEmeter(new EmeterContainer().setDaystatCommand(DaystatCommand.builder().year(year).month(month).build()));
+        return CommandContainer.of(EmeterContainer.of(DaystatCommand.builder().year(year).month(month).build()));
     }
 
     public static CommandContainer getMonthlyPowerStats(int year) {
-        return new CommandContainer().setEmeter(new EmeterContainer().setMonthstatCommand(new MonthstatCommand().setYear(year)));
+        return CommandContainer.of(EmeterContainer.of(MonthstatCommand.ofYear(year)));
     }
 
     public static CommandContainer getTime() {
-        return new CommandContainer().setTime(new TimeContainer().setGetTimeCommand(new GetTimeCommand()));
+        return CommandContainer.of(TimeContainer.of(GetTimeCommand.empty()));
     }
 }

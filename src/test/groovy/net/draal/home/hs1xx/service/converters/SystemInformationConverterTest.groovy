@@ -18,7 +18,7 @@ class SystemInformationConverterTest extends Specification {
 
     def 'if system is null in given DTO, exception is thrown'() {
         given:
-        def givenData = new CommandContainer()
+        def givenData = CommandContainer.of((SystemContainer) null)
 
         when:
         systemInformationConverter.convert(givenData)
@@ -29,7 +29,7 @@ class SystemInformationConverterTest extends Specification {
 
     def 'if sysinfo is null in given DTO, exception is thrown'() {
         given:
-        def givenData = new CommandContainer().setSystem(new SystemContainer())
+        def givenData = CommandContainer.of((SystemContainer) null)
 
         when:
         systemInformationConverter.convert(givenData)
