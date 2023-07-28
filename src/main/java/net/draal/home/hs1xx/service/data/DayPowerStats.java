@@ -7,10 +7,8 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Getter
-@ToString
-@EqualsAndHashCode
 @Builder
-public class DayPowerStats {
-    private final List<TimePowerStats> days;
+public record DayPowerStats(
+        List<TimePowerStats> days
+) {
 }

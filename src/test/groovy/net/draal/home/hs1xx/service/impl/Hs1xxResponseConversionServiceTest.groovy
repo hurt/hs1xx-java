@@ -39,7 +39,7 @@ class Hs1xxResponseConversionServiceTest extends Specification {
 
     def 'register converter replaces existing converter'() {
         given:
-        def givenTarget = Mock(DayPowerStats)
+        def givenTarget = DayPowerStats.builder().build()
         responseConversionService.registerConverter(DayPowerStats, Mock(CommandResponseConverter))
 
         when:

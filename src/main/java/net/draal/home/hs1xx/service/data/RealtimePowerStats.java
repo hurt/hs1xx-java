@@ -5,13 +5,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-@Getter
-@ToString
-@EqualsAndHashCode
 @Builder
-public class RealtimePowerStats {
-    private final Double voltage;
-    private final Double current;
-    private final Double power;
-    private final Double totalEnergy;
+public record RealtimePowerStats(
+        Double voltage,
+        Double current,
+        Double power,
+        Double totalEnergy
+) {
 }

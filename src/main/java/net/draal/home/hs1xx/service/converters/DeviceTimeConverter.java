@@ -6,7 +6,8 @@ import net.draal.home.hs1xx.apimodel.model.time.GetTimeCommand;
 import net.draal.home.hs1xx.service.CommandResponseConverter;
 import net.draal.home.hs1xx.service.data.DeviceTime;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class DeviceTimeConverter implements CommandResponseConverter<DeviceTime> {
     @Override
@@ -14,13 +15,19 @@ public class DeviceTimeConverter implements CommandResponseConverter<DeviceTime>
         Preconditions.checkArgument(commandContainer.time() != null);
         Preconditions.checkArgument(commandContainer.time().getTimeCommand() != null);
 
+        var timeCommand = commandContainer.time().getTimeCommand();
+
         return DeviceTime.builder()
-                .time(asLocalDateTime(commandContainer.time().getTimeCommand()))
+                .date(convertLocalDate(timeCommand))
+                .time(convertLocalTime(timeCommand))
                 .build();
     }
 
-    private LocalDateTime asLocalDateTime(GetTimeCommand getTimeCommand) {
-        return LocalDateTime.of(getTimeCommand.year(), getTimeCommand.month(), getTimeCommand.mday(),
-                getTimeCommand.hour(), getTimeCommand.min(), getTimeCommand.sec());
+    private LocalDate convertLocalDate(GetTimeCommand getTimeCommand) {
+        return LocalDate.of(getTimeCommand.year(), getTimeCommand.month(), getTimeCommand.mday());
+    }
+
+    private LocalTime convertLocalTime(GetTimeCommand getTimeCommand) {
+        return LocalTime.of(getTimeCommand.hour(), getTimeCommand.min(), getTimeCommand.sec());
     }
 }

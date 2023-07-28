@@ -7,11 +7,9 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 
-@Getter
-@ToString
-@EqualsAndHashCode
 @Builder
-public class TimePowerStats {
-    private final LocalDate date;
-    private final Double energy;
+public record TimePowerStats(
+        LocalDate date,
+        Double energy
+) {
 }

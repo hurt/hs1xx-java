@@ -11,8 +11,8 @@ public class DefaultDeviceSocketFactory implements DeviceSocketFactory {
     @Override
     public Socket createSocket(Device device) throws IOException {
         Preconditions.checkArgument(device != null, "Given device is null.");
-        Socket socket = new Socket(device.getHost(), device.getPort());
-        socket.setSoTimeout(device.getSocketTimeout());
+        Socket socket = new Socket(device.host(), device.port());
+        socket.setSoTimeout(device.socketTimeout());
         return socket;
     }
 }

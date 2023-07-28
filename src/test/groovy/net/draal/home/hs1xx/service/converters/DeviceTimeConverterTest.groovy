@@ -6,7 +6,9 @@ import net.draal.home.hs1xx.apimodel.model.time.GetTimeCommand
 import net.draal.home.hs1xx.service.data.DeviceTime
 import spock.lang.Specification
 
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 
 class DeviceTimeConverterTest extends Specification {
     DeviceTimeConverter deviceTimeConverter
@@ -27,7 +29,8 @@ class DeviceTimeConverterTest extends Specification {
                 .build()
         ))
         def expectedResult = DeviceTime.builder()
-                .time(LocalDateTime.of(2021, 02, 20, 6, 56, 41))
+                .date(LocalDate.of(2021, 02, 20))
+                .time(LocalTime.of(6, 56, 41))
                 .build()
 
         when:

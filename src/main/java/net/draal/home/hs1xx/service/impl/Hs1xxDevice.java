@@ -3,18 +3,17 @@ package net.draal.home.hs1xx.service.impl;
 import lombok.*;
 import net.draal.home.hs1xx.service.Device;
 
-@Builder
-@Getter
-@EqualsAndHashCode
-@ToString
-public class Hs1xxDevice implements Device {
+@Builder(builderClassName = "Hs1xxDeviceBuilder")
+public record Hs1xxDevice(
+        @NonNull String host,
+        int port,
+        int socketTimeout
+) implements Device {
     private static final int DEFAULT_PORT = 9999;
     private static final int DEFAULT_TIMEOUT = 10_000;
 
-    @NonNull
-    private final String host;
-    @Builder.Default
-    private final int port = DEFAULT_PORT;
-    @Builder.Default
-    private final int socketTimeout = DEFAULT_TIMEOUT;
+    public static class Hs1xxDeviceBuilder {
+        private int port = DEFAULT_PORT;
+        private int socketTimeout = DEFAULT_TIMEOUT;
+    }
 }

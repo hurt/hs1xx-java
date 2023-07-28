@@ -1,69 +1,54 @@
 package net.draal.home.hs1xx.service.data;
 
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 
 import java.time.Duration;
 
-@Getter
-@ToString
-@EqualsAndHashCode
 @Builder
-public class SystemInformation {
-    private final String alias;
-    private final VendorProperties vendorProperties;
-    private final Location location;
-    private final DeviceState deviceState;
-    private final NetworkInfo networkInfo;
-
-    @Getter
-    @ToString
-    @EqualsAndHashCode
+public record SystemInformation(
+        String alias,
+        VendorProperties vendorProperties,
+        Location location,
+        DeviceState deviceState,
+        NetworkInfo networkInfo
+) {
     @Builder
-    public static class NetworkInfo {
-        private final String macAddress;
-        private final Integer rssi;
+    public record NetworkInfo(
+            String macAddress,
+            Integer rssi
+    ) {
     }
 
-    @Getter
-    @ToString
-    @EqualsAndHashCode
     @Builder
-    public static class DeviceState {
-        private final String status;
-        private final Boolean updating;
-        private final Boolean ledDisabled;
-        private final Boolean relayEnabled;
-        private final Duration relayEnabledSince;
-        private final String activeMode;
-        private final String iconHash;
+    public record DeviceState(
+            String status,
+            Boolean updating,
+            Boolean ledDisabled,
+            Boolean relayEnabled,
+            Duration relayEnabledSince,
+            String activeMode,
+            String iconHash
+    ) {
     }
 
-    @Getter
-    @ToString
-    @EqualsAndHashCode
     @Builder
-    public static class VendorProperties {
-        private final String firmwareVersion;
-        private final String hardwareVersion;
-        private final String model;
-        private final String deviceId;
-        private final String oemId;
-        private final String hardwareId;
-        private final String micType;
-        private final String feature;
-        private final String deviceName;
-
+    public record VendorProperties(
+            String firmwareVersion,
+            String hardwareVersion,
+            String model,
+            String deviceId,
+            String oemId,
+            String hardwareId,
+            String micType,
+            String feature,
+            String deviceName
+    ) {
     }
 
-    @Getter
-    @ToString
-    @EqualsAndHashCode
     @Builder
-    public static class Location {
-        private final Double latitude;
-        private final Double longitude;
+    public record Location(
+            Double latitude,
+            Double longitude
+    ) {
     }
 }

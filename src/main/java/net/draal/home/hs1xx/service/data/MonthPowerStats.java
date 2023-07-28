@@ -7,10 +7,8 @@ import lombok.ToString;
 
 import java.util.List;
 
-@Getter
-@ToString
-@EqualsAndHashCode
 @Builder
-public class MonthPowerStats {
-    private final List<TimePowerStats> months;
+public record MonthPowerStats(
+        List<TimePowerStats> months
+) {
 }
